@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zen Habit</title>
+
+    <!-- PWA Meta -->
+    <meta name="theme-color" content="#E2E8F0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Icons (Material Symbols) -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Dashboard View (Hidden by default until onboarded) -->
+        <main id="dashboard-view" class="view hidden fade-in">
+            <header class="glass-header">
+                <div class="header-content">
+                    <div>
+                        <h1>Zen Habits</h1>
+                        <p class="subtitle" id="current-date"></p>
+                    </div>
+                    <div class="header-actions">
+                        <button id="add-habit-btn" class="icon-btn glass-btn hidden" aria-label="Add Habit">
+                            <span class="material-symbols-rounded">add</span>
+                        </button>
+                        <button id="settings-btn" class="icon-btn glass-btn" aria-label="Settings">
+                            <span class="material-symbols-rounded">settings</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <section class="habits-section" id="habits-list">
+                <!-- Habits will be injected here -->
+            </section>
+
+            <section class="analytics-section">
+                <h2 class="section-title">Consistency</h2>
+                <div class="glass-card heatmap-card" id="heatmap-container">
+                    <!-- Heatmap will be injected here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Onboarding View -->
+        <main id="onboarding-view" class="view fade-in">
+            <div class="onboarding-container">
+                <div class="onboarding-step active" id="step-1">
+                    <span class="material-symbols-rounded huge-icon icon-sage">spa</span>
+                    <h2>What habit do you want to start?</h2>
+                    <p class="step-desc">A small step towards a better you.</p>
+                    <input type="text" id="habit-name-input" class="glass-input"
+                        placeholder="e.g. Read a book, Meditate..." autocomplete="off">
+                    <button class="primary-btn mt-6" id="next-step-1">Continue</button>
+                </div>
+
+                <div class="onboarding-step hidden" id="step-2">
+                    <span class="material-symbols-rounded huge-icon icon-blue">track_changes</span>
+                    <h2>Set a daily goal</h2>
+                    <p class="step-desc">Keep it simple and achievable.</p>
+                    <div class="goal-input-group glass-input-group">
+                        <input type="number" id="habit-goal-value" class="glass-input-inline" placeholder="10" min="1">
+                        <select id="habit-goal-unit" class="glass-select">
+                            <option value="mins">mins</option>
+                            <option value="pages">pages</option>
+                            <option value="times">times</option>
+                            <option value="km">km</option>
+                        </select>
+                    </div>
+                    <div class="btn-group mt-6">
+                        <button class="secondary-btn" id="prev-step-2">Back</button>
+                        <button class="primary-btn" id="next-step-2">Continue</button>
+                    </div>
+                </div>
+
+                <div class="onboarding-step hidden" id="step-3">
+                    <span class="material-symbols-rounded huge-icon icon-charcoal">notifications_active</span>
+                    <h2>When should we remind you?</h2>
+                    <p class="step-desc">Gentle nudges at the right time.</p>
+                    <input type="time" id="habit-time-input" class="glass-input" value="09:00">
+                    <div class="btn-group mt-6">
+                        <button class="secondary-btn" id="prev-step-3">Back</button>
+                        <button class="primary-btn" id="finish-onboarding">Start Journey</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-dots">
+                <div class="dot active" id="dot-1"></div>
+                <div class="dot" id="dot-2"></div>
+                <div class="dot" id="dot-3"></div>
+            </div>
+        </main>
+
+        <!-- Toast Notification Container -->
+        <div id="toast-container"></div>
+
+        <!-- Settings Modal (Hidden by default) -->
+        <div id="settings-modal" class="modal-overlay hidden">
+            <div class="modal-content glass-card fade-in">
+                <h2>Settings</h2>
+                <p>Need a fresh start? You can reset your current habit below. This will clear all your progress.</p>
+                <div class="btn-group mt-6">
+                    <button class="secondary-btn" id="close-settings-btn">Cancel</button>
+                    <button class="primary-btn danger-btn" id="reset-habit-btn">Reset Habit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="js/app.bundle.js"></script>
+</body>
+
+</html>
